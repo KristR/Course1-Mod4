@@ -1,0 +1,7 @@
+# Ignore compiler outputs
+*.o
+*.d
+*.out
+*.i
+*.asm
+*.s
