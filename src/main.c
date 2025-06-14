@@ -21,7 +21,13 @@
  *
  */
 #include "platform.h"
+#include "course1.h"
+
+// Temporary includes:
+#include "data.h"
+#include "stats.h"
 #include "memory.h"
+
 
 #ifdef MODULE2
   #define MAX_LENGTH (10)
@@ -55,6 +61,9 @@ int main(void) {
   #endif
   #ifdef COURSE1
     course1();
+  #endif
+  #ifdef DEV
+    dev();
   #endif
 
   return 0;

@@ -28,6 +28,8 @@ MAP_FILE = c1m4.map
 
 # Platform should be defined when calling 'make'
 PLATFORM = HOST
+V = N
+DEV = N
 
 # ARM specific details
 LINKER_FILE = msp432p401r.lds
@@ -37,7 +39,13 @@ SPECS       = nosys.specs
 
 # Common compiler flags
 CFLAGS = -Wall -Werror -g -O0 -std=c99 
-CPPFLAGS := -D$(PLATFORM)
+CPPFLAGS = -D$(PLATFORM)
+ifeq ($(V), Y)
+	CPPFLAGS += -DVERBOSE
+endif
+ifeq ($(DEV), Y)
+	CPPFLAGS += -DDEV
+endif
 
 # Separate object list for 'clean' command
 # so that the clean list does not depend on the defined platform

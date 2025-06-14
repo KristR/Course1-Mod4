@@ -24,6 +24,12 @@
 #include "data.h"
 #include "stats.h"
 
+
+void dev()
+{
+  PRINTF("Testing 123\n");
+}
+
 int8_t test_data1() {
   uint8_t * ptr;
   int32_t num = -4096;
