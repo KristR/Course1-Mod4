@@ -26,10 +26,11 @@ include sources.mk
 OUT_FILE = c1m4.out
 MAP_FILE = c1m4.map
 
-# Platform should be defined when calling 'make'
+# Commandline flags
 PLATFORM = HOST
-V = N
+V   = N
 DEV = N
+C1  = N
 
 # ARM specific details
 LINKER_FILE = msp432p401r.lds
@@ -45,6 +46,9 @@ ifeq ($(V), Y)
 endif
 ifeq ($(DEV), Y)
 	CPPFLAGS += -DDEV
+endif
+ifeq ($(C1), Y)
+	CPPFLAGS += -DCOURSE1
 endif
 
 # Separate object list for 'clean' command

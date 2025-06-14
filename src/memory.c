@@ -50,6 +50,23 @@ void clear_all(char * ptr, unsigned int size){
 
 uint8_t* my_memmove(uint8_t* src, uint8_t* dst, size_t length)
 {
+  if( src < dst )
+  {
+    src = src + length - 1;
+    dst = dst + length - 1;
+    for(size_t i = 0; i < length; i++)
+    {
+      *(dst - i) = *(src - i);
+    }
+  }
+  else if( dst < src )
+  {
+    for(size_t i = 0; i < length; i++)
+    {
+      *(dst + i) = *(src + i);
+    }
+  }
+
   return dst;
 }
 
@@ -75,10 +92,10 @@ uint8_t* my_reverse(uint8_t* src, size_t length)
 
 void free_words(uint32_t* src)
 {
-  
+  free((void*)src);
 }
 
 int32_t* reserve_words(size_t length)
 {
-  return malloc(length);
+  return (int32_t*) malloc(sizeof(int32_t) * length);
 }

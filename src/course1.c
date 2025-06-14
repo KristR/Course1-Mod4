@@ -27,7 +27,8 @@
 
 void dev()
 {
-  PRINTF("Testing 123\n");
+  // size_t sizeType;
+  // printf("src sizeof:%lu\n",sizeof(sizeType));  
 }
 
 int8_t test_data1() {
