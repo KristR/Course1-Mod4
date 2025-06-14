@@ -33,6 +33,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include "stats.h"
+#include "platform.h"
 
 /* Size of the Data Set */
 #define SIZE (40)
@@ -55,12 +56,16 @@ void main() {
 
   print_statistics(median, mean, min, max);
 
-  printf("\n==== Unsorted dataset ====\n");
+  #ifdef VERBOSE
+    PRINTF("\n==== Unsorted dataset ====\n");
+  #endif
   print_array(test, SIZE);
 
   sort_array(test, SIZE);
   
-  printf("\n==== Sorted dataset ====\n");
+  #ifdef VERBOSE
+    PRINTF("\n==== Sorted dataset ====\n");
+  #endif
   print_array(test, SIZE);
 
 }
@@ -69,147 +74,149 @@ void main() {
 
 void print_statistics(uchar med, uchar mean, uchar min, uchar max)
 {
-  printf("\n==== Dataset statistics ====\n"
+  PRINTF("\n==== Dataset statistics ====\n"
          "Median: %d\nMean: %d\nMinimum: %d\nMaximum: %d\n", med, mean, min, max);
 }
 
 void print_array(uchar *pdata, uint len)
 {
-	if( (pdata != NULL) &&
-	    (len > 0) )
-	{
-	  for( uchar index = 0; index < len; index++ )
-	  {
-	    if( (index == 0) ||
-	        (index % 4 == 0) )
-	    {
-	      printf("%d) %d", index + 1, *(pdata + index));
-	    }
-	    else
-	    {
-	      printf("\t\t%d) %d", index + 1, *(pdata + index));
-	    }
+  #ifdef VERBOSE
+    if( (pdata != NULL) &&
+        (len > 0) )
+    {
+      for( uchar index = 0; index < len; index++ )
+      {
+        if( (index == 0) ||
+            (index % 4 == 0) )
+        {
+          PRINTF("%d) %d", index + 1, *(pdata + index));
+        }
+        else
+        {
+          PRINTF("\t\t%d) %d", index + 1, *(pdata + index));
+        }
 
-	    if( (index + 1) % 4 == 0 )
-	    {
-	      printf("\n");
-	    }
-	  }
+        if( (index + 1) % 4 == 0 )
+        {
+          PRINTF("\n");
+        }
+      }
 
-	  printf("\n");
-	}
+      PRINTF("\n");
+    }
+  #endif
 }
 
 uchar find_median(uchar *pdata, uint len)
 {
-	if( (pdata != NULL) &&
-	    (len > 0) )
-	{
-	  uchar medianArray[len];
+  if( (pdata != NULL) &&
+      (len > 0) )
+  {
+    uchar medianArray[len];
 
-	  for( uchar index = 0; index < len; index++ )
-	  {
-	    medianArray[index] = *(pdata + index);
-	  }
+    for( uchar index = 0; index < len; index++ )
+    {
+      medianArray[index] = *(pdata + index);
+    }
 
-	  sort_array(medianArray, len);
+    sort_array(medianArray, len);
 
-	  uchar middle;
+    uchar middle;
 
-	  if( len % 2 == 0 )
-	  {
-	    middle = len / 2;
-	  }
-	  else
-	  {
-	    middle = (len + 1) / 2;
-	  }
+    if( len % 2 == 0 )
+    {
+      middle = len / 2;
+    }
+    else
+    {
+      middle = (len + 1) / 2;
+    }
 
-	  return medianArray[middle];
-	}
+    return medianArray[middle];
+  }
 }
 
 uchar find_mean(uchar *pdata, uint len)
 {
-	if( (pdata != NULL) &&
-	    (len > 0) )
-	{
-	  uint result = 0;
+  if( (pdata != NULL) &&
+      (len > 0) )
+  {
+    uint result = 0;
 
-	  for( uchar index = 0; index < len; index++ )
-	  {
-	    result += *(pdata + index);
-	  }
+    for( uchar index = 0; index < len; index++ )
+    {
+      result += *(pdata + index);
+    }
 
-	  return result / len;
-	}
+    return result / len;
+  }
 }
 
 uchar find_maximum(uchar *pdata, uint len)
 {
-	if( (pdata != NULL) &&
-	    (len > 0) )
-	{
-	  uchar result = 0;
+  if( (pdata != NULL) &&
+      (len > 0) )
+  {
+    uchar result = 0;
 
-	  for( uchar index = 0; index < len; index++ )
-	  {
-	    if( *(pdata + index) > result )
-	    {
-	      result = *(pdata + index);
-	    }
-	  }
+    for( uchar index = 0; index < len; index++ )
+    {
+      if( *(pdata + index) > result )
+      {
+        result = *(pdata + index);
+      }
+    }
 
-	  return result;
-	}
+    return result;
+  }
 }
 
 uchar find_minimum(uchar *pdata, uint len)
 {
-	if( (pdata != NULL) &&
-	    (len > 0) )
-	{
-	  uchar result = *pdata; // Take the first array element for comparison
+  if( (pdata != NULL) &&
+      (len > 0) )
+  {
+    uchar result = *pdata; // Take the first array element for comparison
 
-	  for( uchar index = 0; index < len; index++ )
-	  {
-	    if( *(pdata + index) < result )
-	    {
-	      result = *(pdata + index);
-	    }
-	  }
+    for( uchar index = 0; index < len; index++ )
+    {
+      if( *(pdata + index) < result )
+      {
+        result = *(pdata + index);
+      }
+    }
 
-	  return result;
-	}
+    return result;
+  }
 }
 
 void sort_array(uchar *pdata, uint len)
 {
-	if( (pdata != NULL) &&
-	    (len > 0) )
-	{
-	  uchar buffer;
-	  bool swapFlag = true;
+  if( (pdata != NULL) &&
+      (len > 0) )
+  {
+    uchar buffer;
+    bool swapFlag = true;
 
-	  while( swapFlag == true )
-	  {
-	    swapFlag = false;
+    while( swapFlag == true )
+    {
+      swapFlag = false;
 
-	    /* Parameter 'len' in the conditional expression is offset by 1 so
-	       that we do not index outside of the array. */
-	    for( uchar index = 0; index < len - 1; index++ )
-	    {
-	      uchar *pCurrent = pdata + index;
-	      uchar *pNext = pdata + index + 1;
+      /* Parameter 'len' in the conditional expression is offset by 1 so
+         that we do not index outside of the array. */
+      for( uchar index = 0; index < len - 1; index++ )
+      {
+        uchar *pCurrent = pdata + index;
+        uchar *pNext = pdata + index + 1;
 
-	      if( *pCurrent > *pNext )
-	      {
-	        swapFlag  = true;
-	        buffer    = *pCurrent;
-	        *pCurrent = *pNext;
-	        *pNext    = buffer;
-	      }
-	    }
-	  }
-	}
+        if( *pCurrent > *pNext )
+        {
+          swapFlag  = true;
+          buffer    = *pCurrent;
+          *pCurrent = *pNext;
+          *pNext    = buffer;
+        }
+      }
+    }
+  }
 }
