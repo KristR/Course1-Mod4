@@ -23,8 +23,8 @@
 #------------------------------------------------------------------------------
 include sources.mk
 
-OUT_FILE = c1m2.out
-MAP_FILE = c1m2.map
+OUT_FILE = c1m4.out
+MAP_FILE = c1m4.map
 
 # Platform should be defined when calling 'make'
 PLATFORM = HOST
@@ -53,7 +53,7 @@ ifeq ($(PLATFORM), HOST)
 else
 	# ARM
 	CC          = arm-none-eabi-gcc
-	LDFLAGS    := -T ../$(LINKER_FILE)
+	LDFLAGS    := -T ./$(LINKER_FILE)
 	ARCH_FLAGS := -mcpu=$(CPU) -march=$(ARCH) -specs=$(SPECS) -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16
 	SOURCES    := $(TARGET_SRC) $(COMMON_SRC)
 	OBJS       := $(TARGET_SRC:.c=.o) $(COMMON_SRC:.c=.o)
@@ -77,7 +77,7 @@ clean:
 	rm -f $(ALL_OBJS) $(ALL_OBJS:.o=.d) $(ALL_OBJS:.o=.i) $(ALL_OBJS:.o=.asm) $(OUT_FILE) $(MAP_FILE)
 
 %.i: %.c
-	$(CC) -E $< -o $@
+	$(CC) -E ./src/$< -o $@
 
 %.asm: %.c
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(INCLUDES) -S $< -o $@
