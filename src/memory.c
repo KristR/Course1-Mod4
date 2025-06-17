@@ -97,7 +97,18 @@ uint8_t* my_memzero(uint8_t* src, size_t length)
 
 uint8_t* my_reverse(uint8_t* src, size_t length)
 {
-  
+  uint8_t* buf = (uint8_t*) malloc(sizeof(uint8_t) * length);
+
+  for(size_t i = 0; i < length; i++)
+  {
+    *(buf + i) = *(src + i);
+  }
+  for(size_t i = 0; i < length; i++)
+  {
+    *(src + i) = *( (buf + length - 1) - i);
+  }
+
+  free((void*)buf);
   return src;
 }
 
