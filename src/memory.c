@@ -52,11 +52,9 @@ uint8_t* my_memmove(uint8_t* src, uint8_t* dst, size_t length)
 {
   if( src < dst )
   {
-    src = src + length - 1;
-    dst = dst + length - 1;
-    for(size_t i = 0; i < length; i++)
+    for(size_t i = length; 0 < i; i--)
     {
-      *(dst - i) = *(src - i);
+      *(dst + i - 1) = *(src + i - 1);
     }
   }
   else if( dst < src )
@@ -81,16 +79,25 @@ uint8_t* my_memcopy(uint8_t* src, uint8_t* dst, size_t length)
 
 uint8_t* my_memset(uint8_t* src, size_t length, uint8_t value)
 {
+  for(size_t i = 0; i < length; i++)
+  {
+    *(src + i) = value;
+  }
   return src;
 }
 
 uint8_t* my_memzero(uint8_t* src, size_t length)
 {
+  for(size_t i = 0; i < length; i++)
+  {
+    *(src + i) = 0;
+  }
   return src;
 }
 
 uint8_t* my_reverse(uint8_t* src, size_t length)
 {
+  
   return src;
 }
 
