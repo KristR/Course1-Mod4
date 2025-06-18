@@ -27,13 +27,17 @@
 
 void dev()
 {
-  int32_t mydata = -90;
-  // uint8_t* myptr = (uint8_t*) calloc(20, sizeof(uint8_t));
+  int32_t mydata = -10000;
   uint8_t myptr[10] = {255,255,255,255,255,255,255,255,255,255};
-  uint32_t base = 10;
+  uint32_t base = 16;
 
   printf("length of 123: %d\n",my_itoa(mydata, myptr, base));  
   print_array(myptr, 10);
+  printf("chars:0x");
+  for(uint8_t i = 0; i < 10; i++)
+    printf("%c", myptr[i]);
+  printf("\n");
+    
 }
 
 int8_t test_data1() {
