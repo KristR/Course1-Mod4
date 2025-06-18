@@ -1,8 +1,8 @@
 #include <stdlib.h>
-#include <stdio.h>
 #include "data.h"
 
 #include "stats.h" // TEMPORARY - for print_array()
+#include <stdio.h> // TEMPORARY - for printf()
 
 uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base)
 {
@@ -11,8 +11,43 @@ uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base)
   uint8_t* pBuf = buf;
   uint8_t  bufOffset = 0;
 
+  // ===== Convert int32 to ASCII string (base 2) =====
+  if(base == 2)
+  {
+    uint32_t bitmask = (uint32_t) 0x1; // Bit mask of 1 bit
+    uint8_t  byteValue;
+    uint8_t  bitOffset = 0;
+
+    for(uint8_t i = 0; i < 32; i++)
+    {
+      byteValue = (uint8_t)((data & bitmask) >> bitOffset); // Apply bitmask to input data. Then bitshift to the right to bring the masked values to the LSB side. 
+      *pBuf = byteValue + '0';                              // Convert the binary digit to ASCII character
+      // if(*pBuf > 57)                                        // If the current digit output is bigger than ASCII '9'...
+      // {
+      //   *pBuf += 7;                                         // ...Add 7 to the ASCII value to skip the signs in the ASCII table and instead start at the letters. 
+      // }
+      bitmask = bitmask << 1; // Update the mask to move onto the next bit in the input
+      bitOffset += 1;         // Update bit offset to make sure the masked data gets moved to LSB position correctly
+      pBuf++;                 // Move onto the next 'index' in buffer
+      len++;                  // Increase total output length by one
+    }
+    // To remove leading zeros in hex final value...
+    uint8_t loop = len;
+    for(uint8_t i = 0; i < loop; i++) // Loop through the buffer
+    {
+      if( *(pBuf - (i + 1)) == 48 )   // If ASCII '0' is found
+      {
+        bufOffset++;                  // Increase buffer offset variable by 1 to later be used when reversing the buffer into final output pointer
+        len--;                        // Decrease length value by 1 as we are removing a digit from the total output
+      }
+      else
+      {
+        break;                        // Stop as soon as a non-zero value is found to prevent legitimate zeros being removed
+      }
+    }
+  }
   // ===== Convert int32 to ASCII string (base 10) =====
-  if(base == 10)
+  else if(base == 10)
   {
     if(data < 0)
     {

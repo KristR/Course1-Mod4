@@ -28,13 +28,13 @@
 void dev()
 {
   int32_t mydata = -10000;
-  uint8_t myptr[10] = {255,255,255,255,255,255,255,255,255,255};
-  uint32_t base = 16;
+  uint8_t myptr[34] = {0};
+  uint32_t base = 2;
 
   printf("length of 123: %d\n",my_itoa(mydata, myptr, base));  
-  print_array(myptr, 10);
-  printf("chars:0x");
-  for(uint8_t i = 0; i < 10; i++)
+  print_array(myptr, 34);
+  printf("chars:");
+  for(uint8_t i = 0; i < 34; i++)
     printf("%c", myptr[i]);
   printf("\n");
     
