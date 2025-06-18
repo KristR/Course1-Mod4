@@ -80,31 +80,31 @@ void print_statistics(uchar med, uchar mean, uchar min, uchar max)
 
 void print_array(uchar *pdata, uint len)
 {
-  // #ifdef VERBOSE
-  if( (pdata != NULL) &&
-      (len > 0) )
-  {
-    for( uchar index = 0; index < len; index++ )
+  #ifdef VERBOSE
+    if( (pdata != NULL) &&
+        (len > 0) )
     {
-      if( (index == 0) ||
-          (index % 4 == 0) )
+      for( uchar index = 0; index < len; index++ )
       {
-        PRINTF("%d) %d", index + 1, *(pdata + index));
-      }
-      else
-      {
-        PRINTF("\t\t%d) %d", index + 1, *(pdata + index));
+        if( (index == 0) ||
+            (index % 4 == 0) )
+        {
+          PRINTF("%d) %d", index + 1, *(pdata + index));
+        }
+        else
+        {
+          PRINTF("\t\t%d) %d", index + 1, *(pdata + index));
+        }
+
+        if( (index + 1) % 4 == 0 )
+        {
+          PRINTF("\n");
+        }
       }
 
-      if( (index + 1) % 4 == 0 )
-      {
-        PRINTF("\n");
-      }
+      PRINTF("\n");
     }
-
-    PRINTF("\n");
-  }
-  // #endif
+  #endif
 }
 
 uchar find_median(uchar *pdata, uint len)

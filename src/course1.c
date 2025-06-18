@@ -27,8 +27,13 @@
 
 void dev()
 {
-  // size_t sizeType;
-  // printf("src sizeof:%lu\n",sizeof(sizeType));  
+  int32_t mydata = -90;
+  // uint8_t* myptr = (uint8_t*) calloc(20, sizeof(uint8_t));
+  uint8_t myptr[10] = {255,255,255,255,255,255,255,255,255,255};
+  uint32_t base = 10;
+
+  printf("length of 123: %d\n",my_itoa(mydata, myptr, base));  
+  print_array(myptr, 10);
 }
 
 int8_t test_data1() {
