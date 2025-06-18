@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "data.h"
-#include "math.h"
 
 #include "stats.h" // TEMPORARY - for print_array()
 
@@ -12,7 +11,7 @@ uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base)
   uint8_t* pBuf = buf;
   uint8_t  bufOffset = 0;
 
-  // ===== Convert int32 to ASCII decimal (base 10) =====
+  // ===== Convert int32 to ASCII string (base 10) =====
   if(base == 10)
   {
     if(data < 0)
@@ -29,7 +28,7 @@ uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base)
       len++;                       // Increase total output length by one
     }
   }
-  // ===== Convert int32 to ASCII hexadecimal (base 16) =====
+  // ===== Convert int32 to ASCII string (base 16) =====
   else if(base == 16)
   {
     uint32_t bitmask = (uint32_t) 0xF; // Bit mask of 4 bits
