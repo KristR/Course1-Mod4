@@ -96,86 +96,90 @@ void set_all(char * ptr, char value, unsigned int size);
 void clear_all(char * ptr, unsigned int size);
 
 /**
- * @brief [brief]
+ * @brief Moves a given number of bytes from src to dst memory address regardless of address overlap.
  *
- * [desc]
+ * Moves a number of bytes (param. 'length') from src to dst memory address while avoiding data corruption in
+ * the event of memory address overlap between source and destination.
  *
- * @param [param]
- * @param [param]
+ * @param src - pointer to source memory address
+ * @param dst - pointer to destination memory address
+ * @param length - number of bytes to be moved
  *
- * @return [return].
+ * @return dst - pointer to destination memory address
  */
 uint8_t* my_memmove(uint8_t* src, uint8_t* dst, size_t length);
 
 /**
- * @brief [brief]
+ * @brief Moves a given number of bytes from src to dst memory address.
  *
- * [desc]
+ * Moves a number of bytes (param. 'length') from src to dst memory address. Does not check for memory address
+ * overlap. May result in corrupted data.
  *
- * @param [param]
- * @param [param]
+ * @param src - pointer to source memory address
+ * @param dst - pointer to destination memory address
+ * @param length - number of bytes to be moved
  *
- * @return [return].
+ * @return dst - pointer to destination memory address
  */
 uint8_t* my_memcopy(uint8_t* src, uint8_t* dst, size_t length);
 
 /**
- * @brief [brief]
+ * @brief Sets a given number of bytes to given value starting at src memory address.
  *
- * [desc]
+ * Sets a given number of bytes (param. 'length') to given value (param. 'value') starting at src memory address.
  *
- * @param [param]
- * @param [param]
+ * @param src - pointer to memory address to begin from 
+ * @param length - number of bytes to be set
+ * @param value - value to set the bytes to
  *
- * @return [return].
+ * @return src - pointer to memory address
  */
 uint8_t* my_memset(uint8_t* src, size_t length, uint8_t value);
 
 /**
- * @brief [brief]
+ * @brief Sets a given number of bytes to zero value starting at src memory address.
  *
- * [desc]
+ * Sets a given number of bytes (param. 'length') to given value (0) starting at src memory address.
  *
- * @param [param]
- * @param [param]
+ * @param src - pointer to memory address to begin from 
+ * @param length - number of bytes to be set
  *
- * @return [return].
+ * @return src - pointer to memory address
  */
 uint8_t* my_memzero(uint8_t* src, size_t length);
 
 /**
- * @brief [brief]
+ * @brief Reverses the order of values for a given range in memory.
  *
- * [desc]
+ * Reverses the order of values for a given range in memory.
  *
- * @param [param]
- * @param [param]
+ * @param src - pointer to memory address to begin from (indicating start of memory range)
+ * @param length - number of bytes to be reversed (indicating end of memory range based on src start)
  *
- * @return [return].
+ * @return src - pointer to memory address to begin from
  */
 uint8_t* my_reverse(uint8_t* src, size_t length);
 
 /**
- * @brief [brief]
+ * @brief Allocates given number of words in heap memory.
  *
- * [desc]
+ * Allocates a number of words (param. 'length') to heap memory using malloc() and
+ * returns the pointer to the start of the allocated memory range. 
  *
- * @param [param]
- * @param [param]
+ * @param length - numer of words to allocate
  *
- * @return [return].
+ * @return int32_t* - pointer to the start of the allocated memory range.
  */
 int32_t* reserve_words(size_t length);
 
 /**
- * @brief [brief]
+ * @brief Unallocates heap memory range starting at given memory address.
  *
- * [desc]
- *
- * @param [param]
- * @param [param]
- *
- * @return [return].
+ * Unallocates heap memory range starting at given memory address (param. 'src').
+ * 
+ * @param src - pointer to the first address in memory range.
+ * 
+ * @return void
  */
 void free_words(uint32_t* src);
 

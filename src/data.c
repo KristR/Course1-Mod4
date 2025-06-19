@@ -1,9 +1,6 @@
 #include <stdlib.h>
 #include "data.h"
 
-#include "stats.h" // TEMPORARY - for print_array()
-#include <stdio.h> // TEMPORARY - for printf()
-
 uint32_t my_pow(uint32_t base, uint32_t exponent)
 {
   uint32_t result = base;
@@ -24,6 +21,7 @@ uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base)
   if( (base <= 16) &&
       (base >= 2) )
   {
+    // ===== Convert int32 to base N and load to buffer =====
     if(data < 0)
     {
       data = data * -1; // Convert negative number to positive
@@ -79,33 +77,34 @@ int32_t my_atoi(uint8_t * ptr, uint8_t digits, uint32_t base)
   int32_t result = 0;
   uint8_t negFlag = 0;
 
-  if( (base <= 16) &&
+  if( (base <= 16) && // Basic check if base is valid
       (base >= 2) )
   {
-    if(*ptr == '-')
+    // ===== Handle negative values =====
+    if(*ptr == '-')   // If value at given pointer (first element of string) is equal to ASCII minus... 
     {
-      negFlag = 1;
-      digits--;
-      ptr++;
+      negFlag = 1;    // Set flag to later turn the result back to negative value
+      digits--;       // Reduce digit count because we no longer are counting the minus character
+      ptr++;          // Ignore the minus character by moving the pointer onto the next address (hopefully pointing to an ASCII digit)
     }
-
-    // Convert base X to int32...
-    for(uint8_t i = 0; i < digits; i++)
+    // ===== Convert ASCII string to base N integer (int32) =====
+    for(uint8_t i = 0; i < digits; i++)     // Loop through given string
     {
-      uint8_t intDigit = *(ptr + i) - '0'; // Convert from ASCII to uint
+      uint8_t uintDigit = *(ptr + i) - '0'; // Convert character at current pointer from ASCII to uint and store as uintDigit
       if( (base > 10) &&
-          (intDigit > 9) )               // If the current digit output is bigger than ASCII '9'...
+          (uintDigit > 9) )                 // If dealing in base 11 or above (using A-F characters), and current decoded digit is above 9...
       {
-        intDigit -= 7;                // ...Add 7 to the ASCII value to skip the signs in the ASCII table and instead start at the letters. 
+        uintDigit -= 7;                     // ...Subtract 7 since ASCII encoded values must jump 7 positions to get from '9' to 'A' due to symbol characters. 
       }
-      uint32_t weight = my_pow(base, (digits - i));
-      result += (intDigit * weight);
+      uint32_t weight = my_pow(base, (digits - i)); // Find the current digit's position's weight (e.g. weight 8 for the 4th bit in base 2)
+      result += (uintDigit * weight);       // Multiply current digit by weight and add to total result
     }
-    result /= base;
+    result /= base;                         // After processing all digits, divide total result by base number to get the final decoded value
 
-    if(negFlag == 1)
+    // ===== Correct the conversion if input was negagtive =====
+    if(negFlag == 1)  // If input indicated that the string was of a negative number...
     {
-        result *= -1;
+        result *= -1; // Convert result back to negative value as the above process was carried out ignoring the minus sign
     }
   }
 
