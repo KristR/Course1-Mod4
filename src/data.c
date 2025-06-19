@@ -6,8 +6,8 @@
 
 uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base)
 {
-  uint8_t len = 0;
-  uint8_t buf[34];
+  uint8_t  len = 0;
+  uint8_t  buf[34];
   uint8_t* pBuf = buf;
   uint8_t  bufOffset = 0;
 
@@ -44,23 +44,22 @@ uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base)
         break;                        // Stop as soon as a non-zero value is found to prevent legitimate zeros being removed
       }
     }
-  }
+    // ===== Reverse buffer content into ptr array =====
+    for(uint8_t i = 0; i < len; i++)
+    {
+      *(ptr + i) = *(pBuf - ((i + 1) + bufOffset) ); // pBuf already points to the last element so we just need to subtract the index number (i) to reverse
+    }
 
-  // ===== Reverse buffer content into ptr array =====
-  for(uint8_t i = 0; i < len; i++)
-  {
-    *(ptr + i) = *(pBuf - ((i + 1) + bufOffset) ); // pBuf already points to the last element so we just need to subtract the index number (i) to reverse
-  }
+    // ===== Final adjustments =====
+    if(*(ptr - 1) == 45)   // If output starts with ASCII '-' (for negative number)
+    {
+      len++;            // Increase total output length by one to account for the '-' symbol as it was not recorded before 
+                        // because len variable was required for loops and the additional length would have resulted in broken indexing
+    }
 
-  // ===== Final adjustments =====
-  if(*(ptr - 1) == 45)   // If output starts with ASCII '-' (for negative number)
-  {
-    len++;            // Increase total output length by one to account for the '-' symbol as it was not recorded before 
-                      // because len variable was required for loops and the additional length would have resulted in broken indexing
+    *(ptr + len) = '\0'; // Add null-terminator to the end of final output
+    len++;               // Increase total output length by one to account for null-terminator
   }
-
-  *(ptr + len) = '\0'; // Add null-terminator to the end of final output
-  len++;               // Increase total output length by one to account for null-terminator
 
   return len;
 }
