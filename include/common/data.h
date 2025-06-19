@@ -1,8 +1,10 @@
 /**
  * @file data.h
- * @brief [brief]
+ * @brief Declares functions my_itoa() and my_atoi()
  *
- * [desc]
+ * This file declares the following functions which are used for course 1 final assignment:
+ * - my_itoa()
+ * - my_atoi()
  *
  * @author Kristaps Ruments
  * @date June 16 2025

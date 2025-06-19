@@ -23,12 +23,6 @@
 #include "platform.h"
 #include "course1.h"
 
-// Temporary includes:
-#include "data.h"
-#include "stats.h"
-#include "memory.h"
-
-
 #ifdef MODULE2
   #define MAX_LENGTH (10)
   char buffer[MAX_LENGTH];

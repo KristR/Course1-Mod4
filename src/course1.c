@@ -45,7 +45,7 @@ void dev()
   printf("\n");
 
   
-  int32_t intOut = my_atoi(myptr, len-1, base); // len - 1 because we don't count the null terminator in this input
+  int32_t intOut = my_atoi(myptr, len, base);
   // printf("test array:\n");
   // print_array(myptr, 34);
 

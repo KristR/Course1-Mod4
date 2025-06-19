@@ -25,8 +25,6 @@
 #include <stdint.h> // for uint*_t types
 #include <stdlib.h> // for size_t type and memory management functions (malloc)
 
-#include "platform.h" // for PRINTF 		----- temporary -----
-
 /**
  * @brief Sets a value of a data array 
  *
