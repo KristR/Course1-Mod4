@@ -27,16 +27,29 @@
 
 void dev()
 {
-  int32_t mydata = -900;
+  int32_t mydata = -245;
   uint8_t myptr[34] = {0};
-  uint8_t base = 2;
+  uint32_t base = 13;
+  uint8_t len = my_itoa(mydata, myptr, base);
 
-  printf("length of 123: %d\n",my_itoa(mydata, myptr, base));  
-  print_array(myptr, 34);
-  printf("chars:");
+  printf("mydata: %d\n",mydata);
+  printf("base: %d\n",base);
+  
+  printf("length of num: %d\n",len);  
+  // printf("test array:\n");
+  // print_array(myptr, 34);
+  
+  printf("ASCII output:");
   for(uint8_t i = 0; i < 34; i++)
     printf("%c", myptr[i]);
   printf("\n");
+
+  
+  int32_t intOut = my_atoi(myptr, len-1, base); // len - 1 because we don't count the null terminator in this input
+  // printf("test array:\n");
+  // print_array(myptr, 34);
+
+  printf("int output:%d\n", intOut);
     
 }
 

@@ -4,6 +4,16 @@
 #include "stats.h" // TEMPORARY - for print_array()
 #include <stdio.h> // TEMPORARY - for printf()
 
+uint32_t my_pow(uint32_t base, uint32_t exponent)
+{
+  uint32_t result = base;
+  for(uint32_t i = 0; i < exponent - 1; i++)
+  {
+    result *= base;
+  }
+  return result;
+}
+
 uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base)
 {
   uint8_t  len = 0;
@@ -66,7 +76,38 @@ uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base)
 
 int32_t my_atoi(uint8_t * ptr, uint8_t digits, uint32_t base)
 {
-  uint8_t result = 0;
+  int32_t result = 0;
+  uint8_t negFlag = 0;
+
+  if( (base <= 16) &&
+      (base >= 2) )
+  {
+    if(*ptr == '-')
+    {
+      negFlag = 1;
+      digits--;
+      ptr++;
+    }
+
+    // Convert base X to int32...
+    for(uint8_t i = 0; i < digits; i++)
+    {
+      uint8_t intDigit = *(ptr + i) - '0'; // Convert from ASCII to uint
+      if( (base > 10) &&
+          (intDigit > 9) )               // If the current digit output is bigger than ASCII '9'...
+      {
+        intDigit -= 7;                // ...Add 7 to the ASCII value to skip the signs in the ASCII table and instead start at the letters. 
+      }
+      uint32_t weight = my_pow(base, (digits - i));
+      result += (intDigit * weight);
+    }
+    result /= base;
+
+    if(negFlag == 1)
+    {
+        result *= -1;
+    }
+  }
 
   return result;  
 }
