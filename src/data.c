@@ -11,25 +11,6 @@ uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base)
   uint8_t* pBuf = buf;
   uint8_t  bufOffset = 0;
 
-/*
-    HANDLE BASE 3 - 15 
-
-    Use base 10 body? not sure if there's a binary way to do this.
-
-    If using base 10, would need some way to invert the bits (bitwise OR?) after 
-    convering negative input to positive int and add 1 bit to convert to 2s complement.
-
-    Otherwise if positive num, handle like base 10 via modulo and division?
-    
-
-
-    Use pure bitwise operation for base 2 and 16?
-    Add variables for:
-    - main loop length (base2 == 32)
-    - bitmask size (base2 == 1 bit increments)
-    - bit offset size (bitshift) (base2 == 1 bit increments)
-*/
-
   if( (base <= 16) &&
       (base >= 2) )
   {
