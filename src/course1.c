@@ -27,9 +27,9 @@
 
 void dev()
 {
-  int32_t mydata = -10000;
+  int32_t mydata = -900;
   uint8_t myptr[34] = {0};
-  uint32_t base = 2;
+  uint8_t base = 13;
 
   printf("length of 123: %d\n",my_itoa(mydata, myptr, base));  
   print_array(myptr, 34);
