@@ -33,6 +33,8 @@ uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base);
 /**
  * @brief Converts a given ASCII string of base 2 to 16 number to a signed 32-bit integer.
  *
+ * Assumes given ASCII string includes the null terminator character and that this is 
+ * reflected in the number of digits (param. 'digits').
  * Converts a given ASCII string of base 2 to 16 number to a signed 32-bit integer.
  * The base in which the input number is represented should be given in parameter 'base'.
  * The string will be read starting from the memory address given in parameter 'ptr'.
@@ -40,7 +42,7 @@ uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base);
  * as a signed 32-bit integer. 
  *
  * @param ptr - starting memory address of string buffer
- * @param digits - number of digits in the ASCII string
+ * @param digits - number of digits in the ASCII string (inluding the null-terminator and minus sign for negatives)
  * @param base - base in which the ASCII string is represented in 
  *
  * @return result - decoded result as a signed 32-bit integer
