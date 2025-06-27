@@ -31,6 +31,26 @@
 #define TEST_NO_ERROR       (0)
 #define TESTCOUNT           (8)
 
+#define BASE_2  (2)
+#define BASE_10 (10)
+#define BASE_16 (16)
+
+
+/**
+ * @brief function to test functionality while developing assignment solution
+ * 
+ * This function is temporary and will have various uses over time as the 
+ * solution to the module 4 assignment is being developed.
+ * Most often will print the output of various functions defined in these files:
+ * course1.c
+ * stats.c
+ * data.c
+ * memory.c
+ *
+ * @return void
+ */
+void dev();
+
 /**
  * @brief function to run course1 materials
  * 

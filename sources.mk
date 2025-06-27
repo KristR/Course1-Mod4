@@ -11,7 +11,10 @@
 
 # Source lists
 COMMON_SRC = ./src/main.c \
-             ./src/memory.c
+             ./src/memory.c \
+             ./src/data.c \
+             ./src/stats.c \
+             ./src/course1.c
 
 TARGET_SRC = ./src/system_msp432p401r.c \
              ./src/interrupts_msp432p401r_gcc.c \

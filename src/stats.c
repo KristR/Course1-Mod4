@@ -38,7 +38,7 @@
 /* Size of the Data Set */
 #define SIZE (40)
 
-void main() {
+void not_main() {
 
   unsigned char test[SIZE] = { 34, 201, 190, 154,   8, 194,   2,   6,
                               114, 88,   45,  76, 123,  87,  25,  23,
@@ -134,6 +134,7 @@ uchar find_median(uchar *pdata, uint len)
 
     return medianArray[middle];
   }
+  return (uchar) 0;
 }
 
 uchar find_mean(uchar *pdata, uint len)
@@ -150,6 +151,7 @@ uchar find_mean(uchar *pdata, uint len)
 
     return result / len;
   }
+  return (uchar) 0;
 }
 
 uchar find_maximum(uchar *pdata, uint len)
@@ -169,6 +171,7 @@ uchar find_maximum(uchar *pdata, uint len)
 
     return result;
   }
+  return (uchar) 0;
 }
 
 uchar find_minimum(uchar *pdata, uint len)
@@ -188,6 +191,7 @@ uchar find_minimum(uchar *pdata, uint len)
 
     return result;
   }
+  return (uchar) 0;
 }
 
 void sort_array(uchar *pdata, uint len)

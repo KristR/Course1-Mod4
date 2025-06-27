@@ -24,6 +24,35 @@
 #include "data.h"
 #include "stats.h"
 
+
+void dev()
+{
+  int32_t mydata = -245;
+  uint8_t myptr[34] = {0};
+  uint32_t base = 13;
+  uint8_t len = my_itoa(mydata, myptr, base);
+
+  printf("mydata: %d\n",mydata);
+  printf("base: %d\n",base);
+  
+  printf("length of num: %d\n",len);  
+  // printf("test array:\n");
+  // print_array(myptr, 34);
+  
+  printf("ASCII output:");
+  for(uint8_t i = 0; i < 34; i++)
+    printf("%c", myptr[i]);
+  printf("\n");
+
+  
+  int32_t intOut = my_atoi(myptr, len, base);
+  // printf("test array:\n");
+  // print_array(myptr, 34);
+
+  printf("int output:%d\n", intOut);
+    
+}
+
 int8_t test_data1() {
   uint8_t * ptr;
   int32_t num = -4096;

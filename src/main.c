@@ -21,7 +21,7 @@
  *
  */
 #include "platform.h"
-#include "memory.h"
+#include "course1.h"
 
 #ifdef MODULE2
   #define MAX_LENGTH (10)
@@ -55,6 +55,9 @@ int main(void) {
   #endif
   #ifdef COURSE1
     course1();
+  #endif
+  #ifdef DEV
+    dev();
   #endif
 
   return 0;
